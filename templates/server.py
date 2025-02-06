@@ -10,7 +10,10 @@ def emo_detector():
     response = emotion_detector(text_to_analyze)
     preds = formatted_response['emotionPredictions'][0]['emotion']
     emo = max(preds, key + preds.get)
-    return "For the given statement, the system response is {}. The dominant emotion: {}."
+    if emo is None:
+        return "Invalid text! Please try again!"
+    else:
+        return "For the given statement, the system response is {}. The dominant emotion: {}.".format(preds, emo)
 
 @app.route("/")
 def render_index_page():
